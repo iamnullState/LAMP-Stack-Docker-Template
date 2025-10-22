@@ -1,0 +1,19 @@
+{
+    "name": "nullstate/app",
+    "description": "LAMP stack template for Docker.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "LAMP\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Null",
+            "email": "iamnullstate@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

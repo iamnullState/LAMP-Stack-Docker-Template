@@ -1,0 +1,54 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: LAMP_PROJECT
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./config/php.ini:/usr/local/etc/php/conf.d/99-overrides.ini:ro
+      - ./config/vhost.conf:/etc/apache2/sites-available/000-default.conf:ro
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+    depends_on: [db]
+    restart: unless-stopped
+
+  db:
+    image: mariadb:11
+    container_name: LAMP_PROJECT_DB
+    env_file:
+      - ./app/.env
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpass
+      - MARIADB_DATABASE=LAMP_PROJECT
+      - MARIADB_USER=lamp
+      - MARIADB_PASSWORD=pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: LAMP_PROJECT_phpmyadmin
+    env_file:
+      - ./app/.env
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=lamp
+      - PMA_PASSWORD=pass
+    ports:
+      - "8081:80"
+    depends_on: [db]
+    restart: unless-stopped
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+
+volumes:
+  db_data:
