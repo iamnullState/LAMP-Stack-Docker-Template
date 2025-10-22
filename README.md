@@ -14,12 +14,12 @@ It includes:
     
 - MailHog (local SMTP sink + web UI)
     
-- A committed .env (intentionally kept in Git for educational purposes)
+- A committed .env (intentionally kept in Git while I learn more)
     
 
   
 
-> Note: Keeping real secrets in Git is unsafe. This template commits .env on purpose for learning and quick starts. For anything beyond local learning, do not commit secrets.
+> Note: I keeping real secrets in Git is unsafe. This template commits .env on purpose for learning and quick starts. For anything beyond local learning, I know to not commit secrets.
 
 ---
 
@@ -115,8 +115,7 @@ MAIL_FROM_NAME="LAMP Project"
 ```
 docker compose up -d
 ```
-
-3.   
+   
     
 4. **Visit services**
     
@@ -150,9 +149,7 @@ cd /var/www/html
 composer install
 ```
 
-5. -   
-        
-    - Or run Composer on your host in app/ and mount vendor/ (already mounted via ./app:/var/www/html).
+5.  - Or run Composer on your host in app/ and mount vendor/ (already mounted via ./app:/var/www/html).
         
     
 
@@ -269,23 +266,10 @@ mailhog:
 
 This template doesn’t enforce auth. If you add a hardcoded login in your PHP code, it will just work as usual. The committed .env remains available to PHP via vlucas/phpdotenv if you choose to read configuration values at runtime.
 
----
-
-## **Production Notes**
-
-- Don’t commit real secrets. For real projects, put secrets in a non-committed .env or a secret manager, and ensure docker-compose.yml does not hardcode credentials.
-    
-- Use strong, unique passwords.
-    
-- Configure proper mail delivery (not MailHog) when deploying.
-    
-- Add HTTPS termination (e.g., via a reverse proxy) if exposing publicly.
-    
 
 ---
 
 ## **License**
 
-  
 
 Use, modify, and adapt freely for your own projects.
